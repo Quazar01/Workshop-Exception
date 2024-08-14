@@ -25,6 +25,56 @@ public class Main {
 
         NameService nameService = new NameService(maleFirstNames, femaleFirstNames,lastNames);
 
+        // Test adding a male first name that already exists.
+//        try {
+//            nameService.addMaleFirstName("William");
+//        } catch (DuplicateNameException e) {
+//            System.out.println(e.getMessage());
+//            throw new RuntimeException(e);
+//        }
+
+        // Test adding a male first name that does not exist.
+//        try {
+//            nameService.addMaleFirstName("John");
+//        } catch (DuplicateNameException e) {
+//            System.out.println(e.getMessage());
+//            throw new RuntimeException(e);
+//        }
+
+        // Test adding a female first name that already exists.
+//        try {
+//            nameService.addFemaleFirstName("Alice");
+//        } catch (DuplicateNameException e) {
+//            System.out.println(e.getMessage());
+//            throw new RuntimeException(e);
+//        }
+
+        // Test adding a female first name that does not exist.
+//        try {
+//            nameService.addFemaleFirstName("Nourshan");
+//        } catch (DuplicateNameException e) {
+//            System.out.println(e.getMessage());
+//            throw new RuntimeException(e);
+//        }
+//
+
+//        // Test adding a last name that already exists.
+//        try {
+//            nameService.addLastName("Andersson");
+//        } catch (DuplicateNameException e) {
+//            System.out.println(e.getMessage());
+//            throw new RuntimeException(e);
+//        }
+
+//        // Test adding a last name that does not exist.
+//        try {
+//            nameService.addLastName("asdf");
+//        } catch (DuplicateNameException e) {
+//            System.out.println(e.getMessage());
+//            throw new RuntimeException(e);
+//        }
+//
+
         Person test = nameService.getNewRandomPerson();
         System.out.println(test);
 
