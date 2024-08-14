@@ -55,7 +55,7 @@ public class CSVReader_Writer {
         List<String> names=null;
 
         try {
-            BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"))
+            BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"));
             names = reader.lines()
                     .flatMap(line -> Stream.of(line.split(",")))
                     .collect(Collectors.toList());
@@ -94,32 +94,76 @@ public class CSVReader_Writer {
 
     public static void saveLastNames(List <String> lastNames){
 
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get("lastnames.txt"));
-            for(String toWrite : lastNames){
+        BufferedWriter writer = null;
+        try {
+            writer = Files.newBufferedWriter(Paths.get("lastnames.txt"));
+
+            for (String toWrite : lastNames) {
                 writer.append(toWrite+",");
             }
             writer.flush();
+        } catch (IOException e) {
+            System.out.println("Error writing to file" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        finally {
+            if(writer != null){
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    System.out.println("Error closing file" + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        }
       }
 
     public static void saveFemaleNames(List <String> femaleNames){
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_female.txt"));
-            for(String toWrite : femaleNames){
-                writer.append(toWrite+",");
+        BufferedWriter writer = null;
+        try {
+            writer = Files.newBufferedWriter(Paths.get("firstname_female.txt"));
+            for (String toWrite : femaleNames) {
+                writer.append(toWrite + ",");
             }
             writer.flush();
+        } catch (IOException e) {
+            System.out.println("Error writing to file" + e.getMessage());
+            throw new RuntimeException(e);
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    System.out.println("Error closing file" + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
 
 
 
     public static void saveMaleNames(List <String> maleNames){
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get("firstname_males.txt"));
-            for(String toWrite : maleNames){
-                writer.append(toWrite+",");
+        BufferedWriter writer = null;
+        try {
+            writer = Files.newBufferedWriter(Paths.get("firstname_males.txt"));
+            for (String toWrite : maleNames) {
+                writer.append(toWrite + ",");
             }
             writer.flush();
-
-
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 
