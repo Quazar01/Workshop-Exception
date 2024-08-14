@@ -2,6 +2,7 @@ package se.lexicon.exceptions.workshop.fileIO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,35 +17,51 @@ public class CSVReader_Writer {
      * You should also close the Buffered reader in the finally block
      * @return List<String>of male firstnames
      */
-    public static List<String> getMaleFirstNames(){
+     public static List<String> getMaleFirstNames() {
+         BufferedReader reader = null;
+         List<String> names = null;
+         try {
+             reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));
+             names = reader.lines()
+                     .flatMap(line -> Stream.of(line.split(",")))
+                     .collect(Collectors.toList());
 
-        BufferedReader reader = null;
-        List <String> names = null;
+         } catch (FileNotFoundException e) {
+                System.out.println("File not found" + e.getMessage());
+         }
+         catch (IOException e) {
+             System.out.println("IO Exception" + e.getMessage());
 
-
-        	reader = Files.newBufferedReader(Paths.get("firstname_males.txt"));
-            names = reader.lines()
-                    .flatMap(line -> Stream.of(line.split(",")))
-                    .collect(Collectors.toList());
-
-         	return names;
-        }
+         } finally {
+             if (reader != null) {
+                 try {
+                     reader.close();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+             }
+         }
+         return names;
+     }
 
 
 
     /**
      * This method getFemaleFirstNames should make use of a try-catch with resources
-     * @return
+     * @return List<String> of female firstnames
      */
     public static List<String> getFemaleFirstNames(){
 
         List<String> names=null;
 
+        try {
             BufferedReader reader = Files.newBufferedReader(Paths.get("firstname_female.txt"))
-                names = reader.lines()
-                        .flatMap(line -> Stream.of(line.split(",")))
-                        .collect(Collectors.toList());
-
+            names = reader.lines()
+                    .flatMap(line -> Stream.of(line.split(",")))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return names;
     }
 
