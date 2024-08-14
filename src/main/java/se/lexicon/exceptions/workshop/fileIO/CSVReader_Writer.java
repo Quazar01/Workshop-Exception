@@ -83,9 +83,7 @@ public class CSVReader_Writer {
                 names = reader.lines()
                 .flatMap(line -> Stream.of(line.split(",")))
                 .collect(Collectors.toList());
-
-
-        }finally{
+        } finally{
             if(reader != null){
                 reader.close();
             }

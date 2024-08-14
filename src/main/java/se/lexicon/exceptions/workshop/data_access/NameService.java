@@ -61,10 +61,13 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addFemaleFirstName(String name){
-	    	femaleFirstNames.add(name);
-	    	CSVReader_Writer.saveFemaleNames(femaleFirstNames);
-	    		
+	    public void addFemaleFirstName(String name) throws DuplicateNameException {
+
+			if (femaleFirstNames.contains(name)) {
+				throw new DuplicateNameException("Name already exists, please enter a new name");
+			}
+			femaleFirstNames.add(name);
+			CSVReader_Writer.saveFemaleNames(femaleFirstNames);
 	    }
 
 	    /**
@@ -73,7 +76,11 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addMaleFirstName(String name){
+	    public void addMaleFirstName(String name) throws DuplicateNameException {
+
+			if (maleFirstNames.contains(name)) {
+				throw new DuplicateNameException("Name already exists, please enter a new name");
+			}
 	    	maleFirstNames.add(name);
 	        CSVReader_Writer.saveMaleNames(maleFirstNames);
 	    }
@@ -84,7 +91,10 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param lastName
 	     */
-	    public void addLastName(String lastName){
+	    public void addLastName(String lastName) throws DuplicateNameException{
+			if (lastNames.contains(lastName)) {
+				throw new DuplicateNameException("Name already exists, please enter a new name");
+			}
 	    	lastNames.add(lastName);
 	        CSVReader_Writer.saveLastNames(lastNames);
 	    }
